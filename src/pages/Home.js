@@ -1,15 +1,24 @@
 
-/*import { Link } from "react-router-dom";
+/*import { Link, useLocation } from "react-router-dom";
 import { productData } from "../data/products";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CategoryMenu from "../components/CategoryMenu";
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const initialCategory = searchParams.get("category") || "All";
+
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+
+  // Update selectedCategory if URL changes (optional)
+  useEffect(() => {
+    setSelectedCategory(initialCategory);
+  }, [initialCategory]);
 
   const filteredProducts =
     selectedCategory === "All"
-      ? [] // 👉 No products for "All" by default
+      ? [] // Show default posters for "All"
       : productData.filter(
           (product) =>
             product.category.toLowerCase() === selectedCategory.toLowerCase()
@@ -25,10 +34,8 @@ export default function Home() {
 
      
       {selectedCategory === "All" ? (
-        
         <div>
-      
-         
+          
           <div className="mb-8 mt-10">
             <h2 className="text-2xl font-bold text-center mb-4 text-red-600">
               🎉 Today'S Special 🎉
@@ -49,7 +56,6 @@ export default function Home() {
                 alt="Festival Poster 3"
                 className="rounded-2xl shadow-lg"
               />
-        
             </div>
           </div>
 
@@ -63,7 +69,7 @@ export default function Home() {
                 🛍️ Buy 1 Get Upto 100%
               </span>
               <span className="mx-10 text-lg font-semibold text-yellow-800">
-                 Flat up to 50% Off on All Products!
+                🍫 Flat up to 50% Off on All Products!
               </span>
             </marquee>
           </div>
@@ -77,7 +83,6 @@ export default function Home() {
               Enjoy our exclusive festival discounts and special deals today!
             </p>
 
-           
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-center">
               <img
                 src="/images/mugs/image_30.jpg"
@@ -101,7 +106,7 @@ export default function Home() {
               />
             </div>
           </div>
-        </div> // ✅ closed properly
+        </div>
       ) : (
         <>
           
@@ -155,22 +160,22 @@ export default function Home() {
 
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
-  // Update selectedCategory if URL changes (optional)
+  // Update when URL changes
   useEffect(() => {
     setSelectedCategory(initialCategory);
   }, [initialCategory]);
 
   const filteredProducts =
     selectedCategory === "All"
-      ? [] // Show default posters for "All"
+      ? [] // default posters for "All"
       : productData.filter(
           (product) =>
             product.category.toLowerCase() === selectedCategory.toLowerCase()
         );
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      {/* Category Menu at top */}
+    <div className="p-6 bg-gray-50 min-h-screen relative">
+      {/* Category Menu */}
       <CategoryMenu
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
@@ -268,7 +273,7 @@ export default function Home() {
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full max-h-72 object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-5 flex flex-col flex-grow">
@@ -292,4 +297,5 @@ export default function Home() {
     </div>
   );
 }
+
 
