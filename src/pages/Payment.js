@@ -1,53 +1,10 @@
 
-/*import { useLocation } from "react-router-dom";
-
-export default function Payment() {
-  const location = useLocation();
-  const { cart, totalPrice } = location.state || {};
-
-  if (!cart || cart.length === 0) {
-    return <p className="p-6 text-red-500 text-center">No cart items found.</p>;
-  }
-
-  return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="max-w-lg bg-white rounded-lg shadow-lg p-8 w-full">
-        <h1 className="text-2xl font-bold mb-4">Payment Options</h1>
-        <p className="mb-4 font-semibold">Total: ₹{totalPrice}</p>
-
-        <ul className="mb-4">
-          {cart.map((item) => (
-            <li key={item.id}>
-              {item.title} × {item.quantity} = ₹{item.price * item.quantity}
-            </li>
-          ))}
-        </ul>
-
-        <div className="space-y-4">
-          <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-            Credit / Debit Card
-          </button>
-          <button className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
-            UPI / Google Pay / PhonePe
-          </button>
-          <button className="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600">
-            Net Banking
-          </button>
-          <button className="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-900">
-            Cash on Delivery
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}*/
 import { useLocation } from "react-router-dom";
 
 export default function Payment() {
   const location = useLocation();
   const { cart, totalPrice, product } = location.state || {};
 
-  // Handle both cases: Cart checkout or Buy Now
   const items = cart || (product ? [{ ...product, quantity: 1 }] : []);
   const total = totalPrice || (product ? product.price : 0);
 
@@ -87,5 +44,6 @@ export default function Payment() {
     </div>
   );
 }
+
 
 

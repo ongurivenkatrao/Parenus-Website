@@ -4,10 +4,12 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Counter from "./pages/Counter";
-import ProductDetails from "./pages/ProductDetails"; // ✅ Added
-import Cart from "./pages/Cart"; // ✅ Add import
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Payment from "./pages/Payment";
+import Invoice from "./pages/Invoice";
+
 function App() {
   return (
     <Router>
@@ -19,6 +21,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} /> 
         <Route path="/cart" element={<Cart />} /> 
         <Route path="/login" element={<Login />} /> 
+        <Route path="/invoice" element={<Invoice />} />
         <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>
@@ -26,5 +29,3 @@ function App() {
 }
 
 export default App;
-
-
